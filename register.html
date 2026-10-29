@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript</title>
+</head>
+<body>
+<input type="text" id="name" placeholder="enter name in lowercase">
+<button onclick="capitalize()">Submit</button>
+
+<p id="output"></p>
+
+
+<script>
+function capitalize() {
+  let n = document.getElementById("name").value;
+
+  if (n == "") {
+    document.getElementById("output").innerText = "Please enter name";
+    return;
+  }
+
+  if (n != n.toLowerCase()) {
+    document.getElementById("output").innerText = "Please use lowercase only";
+    return;
+  }
+
+  let finalName = n[0].toUpperCase() + n.substring(1);
+  document.getElementById("output").innerText = finalName;
+}
+</script>
+
+
+
+<h3>BMI Calculator</h3>
+
+<input type="number" id="weight" placeholder="Weight in kg e.g. 70">
+<input type="number" id="height" placeholder="Height in meters e.g. 1.75">
+<button onclick="calculateBMI()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function calculateBMI() {
+  let weight = parseFloat(document.getElementById("weight").value);
+  let height = parseFloat(document.getElementById("height").value);
+
+  if (weight == "" || height == "" || weight <= 0 || height <= 0) {
+    document.getElementById("result").innerText = "Please enter valid weight and height";
+    return;
+  }
+  let bmi = weight / (height * height);
+
+  let status = "";
+  if (bmi < 18.5) {
+    status = "Underweight";
+  } else if (bmi < 24.9) {
+    status = "Normal";
+  } else if (bmi < 29.9) {
+    status = "Overweight";
+  } else {
+    status = "Obese";
+  }
+
+  document.getElementById("result").innerText = 
+    "Your BMI is " + bmi.toFixed(2) + " (" + status + ")";
+}
+</script>
+
+
+
+  <h3>Find Number Next To Target</h3>
+  
+  <input type="text" id="arrayInput" placeholder="e.g. 10,20,30,20,40" value="10,20,30,20,40,50">
+  <input type="number" id="targetInput" placeholder="Target" value="20">
+  <button onclick="findNumbers()">Find</button>
+
+  <div id="result"></div>
+
+<script>
+function findNumbers() {
+  const arr = document.getElementById('arrayInput').value.split(',').map(Number);
+  const target = Number(document.getElementById('targetInput').value);
+
+  let neighbors = [];
+  let nextAfter = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) {
+      if (i > 0) neighbors.push(arr[i - 1]);
+      if (i < arr.length - 1) neighbors.push(arr[i + 1]);
+      
+      
+      if (i < arr.length - 1) nextAfter.push(arr[i + 1]);
+    }
+  }
+
+  document.getElementById('result').innerHTML =
+   `Array: [${arr}] <br>
+    Target: ${target} <br><br>
+    Scenario 1 (Left & Right Neighbors): [${neighbors}] <br>
+    Scenario 2 (Only Next After Target): [${nextAfter}]`;
+}
+</script>
+
+
+
+  <h3>Enter Your Name lowercase only</h3>
+  <input type="text" id="nameInput" placeholder="e.g. ali">
+  <button onclick="showName()">Display</button>
+  <div id="result"></div>
+
+<script>
+function showName() {
+  let name = document.getElementById('nameInput').value.trim();
+  let resultDiv = document.getElementById('result');
+  if (name === "") {
+    resultDiv.innerHTML = "Please enter your name!";
+    return;
+  }
+
+  if (name !== name.toLowerCase()) {
+    resultDiv.innerHTML = "Error: Please enter name in lowercase only!";
+    return;
+  }
+  let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+  resultDiv.innerHTML = "Your Name is: " + capitalizedName;
+}
+</script>
+</body>
+</html>
